@@ -1,0 +1,189 @@
+
+
+// Returns a random DNA base  1 letter only
+const returnRandBase = () => {
+  const dnaBases = ['A', 'T', 'C', 'G']
+  return dnaBases[Math.floor(Math.random() * 4)] 
+};
+
+
+
+// Returns a random single strand of DNA containing 15 bases
+const mockUpStrand = () => {
+  const newStrand = []
+  for (let i = 0; i < 15; i++) {
+    newStrand.push(returnRandBase())
+  }
+  return newStrand
+};
+
+
+
+
+
+
+//create a worm:
+function pAequorFactory(specimenNum,dna=mockUpStrand()) {
+  dna;
+  //console.log('original dna: \n',dna);
+
+
+//object with mutate, compare,willLikelysurvive and complementStrand =>:
+  return {
+    name: specimenNum,
+    mutate() {
+    
+      let number = Math.floor(Math.random() * 15);
+      let oldLetter = dna[number];
+      let newLetter = returnRandBase();
+      while (oldLetter === newLetter) {
+        newLetter = returnRandBase();}
+
+      dna[number] = newLetter;
+    return dna;
+    },
+
+
+
+
+//compare:
+    compare(pAequor) {
+      dna;
+      counter =0;  
+      for (i=0; i<15; i++) {
+        if (pAequor[i] === dna[i]) {
+          counter += 1;
+        };}; 
+      let percentage = (counter *100)/15;
+      return percentage; },
+
+
+
+
+
+
+
+    willLikelySurvive() {
+      dna;
+      counter = 0;
+      let goodGenes = ['C','G'];
+      for (letter of dna) {
+        if (goodGenes.includes(letter)) {
+          counter +=1;
+        };};
+     
+        let percentage = (counter*100)/15;
+        if (percentage>=60) {
+ 
+          return dna;
+        }
+        else { return false}
+        ;}, // <= end of willLikelySurvive(),
+
+
+//complement strand:
+      complementStrand() {
+        let dna1 = mockUpStrand();
+        let complementDna = [];
+
+        for (letter of dna1) {
+            switch (letter) {
+                case 'A' :
+                  complementDna.push('T');
+                  break;
+                case 'T' :
+                  complementDna.push('A');
+                  break;
+                case 'C':
+                  complementDna.push('G');
+                  break;
+                case 'G':
+                  complementDna.push('C');
+                  break;};  //<= end of switch
+
+        }; //<= end of dna1 loop 
+
+
+
+
+        console.log('dna1 for complement strand: \n',dna1, 'complementDna: \n',complementDna);
+
+
+
+
+      }
+
+
+
+
+
+
+  } //end of object
+  
+  ;};  // <= end of the main function
+ 
+
+//function to run:
+pAequorFactory('lucy').complementStrand();
+
+
+
+
+
+
+
+
+
+// find 30 strong genes:
+function thirtyHappyChappies() {
+  let chaps = [];
+  let testSample = pAequorFactory('lucy').willLikelySurvive();
+  
+  while (chaps.length <=29) {
+    if (testSample) {
+      chaps.push(testSample);
+    };
+    testSample = pAequorFactory('lucy').willLikelySurvive();
+    
+  
+  };
+  
+
+
+
+
+
+
+    //console.log('chaps: ',chaps,'size: ', chaps.length);
+    
+    return chaps;};  //<= end of thirtyHappyChappies() function
+
+
+
+
+
+
+
+
+
+
+
+
+//end of code:
+console.log('end of code here')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
